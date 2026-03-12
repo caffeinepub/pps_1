@@ -1,0 +1,6 @@
+{
+  "frontend/src/pages/teacher/TeacherProfile.tsx": "Read-only teacher profile page displaying the logged-in teacher's information including name, teacher number, qualification, contact, email, address, joining date, class incharge assignment, and session in a clean card-based layout with orange accents.",
+  "frontend/src/pages/teacher/TeacherMenu.tsx": "Teacher menu page with 10 sub-sections (My Class, My Timetable, Leave, Salary, Progress, Homework, Lesson Plan, Event Calendar, Greetings, My Academics), each implemented as an inline section component with full functionality for teachers to manage their daily tasks.",
+  "frontend/src/index.css": "Global CSS with OKLCH color system using orange as the primary accent color for both light and dark modes, plus a scrollbar-hide utility class.",
+  "frontend/tailwind.config.js": "Tailwind configuration with orange and amber color palettes explicitly defined, Inter font family, custom border radius, box shadows, and animation keyframes."
+}

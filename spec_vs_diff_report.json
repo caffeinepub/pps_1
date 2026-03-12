@@ -1,0 +1,185 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-25T13:58:38.827Z",
+  "summary": "The diff implements a substantial portion of the PPS School ERP frontend and backend. Many core modules are present (Login, Admin Dashboard, Circulars, Sessions, Students, Teachers, Teacher Timetable, Greetings, Lesson Plan, Event Calendar, Leave, Academics with sub-modules, Fees, Class Subjects, Class Timetable). The Teacher dashboard and all teacher-facing modules are referenced in App.tsx routing but the actual teacher component files were omitted from the visible diff. The Motoko backend is truncated but shows basic type definitions. Several specific requirements have gaps or are unverifiable due to truncation.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Student login route to Student dashboard must be implemented",
+      "reason": "App.tsx only defines /admin and /teacher routes; no /student route exists in the visible diff.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "requirement": "Class Teacher tab must be a distinct functional tab inside Session > Class top tab bar",
+      "reason": "ClassDetailView.tsx has a 'teacher' tab that simply re-renders ClassSubjects with a teacherView prop — there is no dedicated Class Teacher component implementing teacher assignment to the class.",
+      "evidence": [
+        "frontend/src/pages/admin/ClassDetailView.tsx"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "requirement": "Admin can save lesson plans to history (explicit Save action)",
+      "reason": "AdminLessonPlan.tsx is read-only — it displays submitted lesson plans but provides no Save to history button or action.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminLessonPlan.tsx"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "requirement": "Progress: Done & Send dispatches to subject teacher; teacher enters obtained marks and submits back; completed subjects show checkmark; Approve sends results to students; subject order preserved",
+      "reason": "AdminAcademics.tsx is truncated at the ProgressSection function body — the full workflow cannot be confirmed.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminAcademics.tsx"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "requirement": "Teacher Academics: Salary auto-calculates based on attendance (present_days x per_day_rate, deductions for absences/holidays); monthly history with three-dots",
+      "reason": "AdminAcademics.tsx is truncated before SalarySection is rendered, so salary auto-calculation logic cannot be confirmed.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminAcademics.tsx"
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "requirement": "Teacher dashboard: Home shows today's circulars; Communication with chat (text + multi-type attachments); Profile; Menu with 10 sub-items",
+      "reason": "TeacherDashboard is referenced in App.tsx but the file is listed as omitted from the visible diff.",
+      "evidence": [
+        "frontend/src/App.tsx"
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "requirement": "Teacher > My Class with 6-tab top bar: Class Incharge, Class Students, Class Timetable, Attendance, Leave, Subjects — visible only to class incharge teachers",
+      "reason": "Teacher module files are listed as omitted from the diff due to limits; cannot confirm implementation.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-23",
+      "requirement": "Teacher > My Timetable with day selector and tabular view",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-24",
+      "requirement": "Teacher > Leave with My Leave and Other Leave tabs; submit to admin; show Approved/Rejected result",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-25",
+      "requirement": "Teacher > Salary: month selector, Total Amount, Deducted Amount, Approved Amount",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-26",
+      "requirement": "Teacher > Progress: assigned classes, progress titles, student list, teacher enters obtained marks and submits to admin",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-27",
+      "requirement": "Teacher > Homework: form with session, class, title, description, multi-attachment (image/video); save to history",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-28",
+      "requirement": "Teacher > Lesson Plan: form with session, class, subject dropdown, topic, start/end date; Send & Save dispatches to admin",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-29",
+      "requirement": "Teacher > My Academics: Class Incharge, Classes to Teach (tabular), My Attendance (read-only)",
+      "reason": "Teacher module files omitted from visible diff.",
+      "evidence": []
+    },
+    {
+      "id": "REQ-12",
+      "requirement": "Greetings image attachments must be JPG only — no PDFs, no other file types",
+      "reason": "AdminGreetings.tsx checks file.type.startsWith('image/') which allows PNG, GIF, WebP etc., not strictly JPG/JPEG only as required.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminGreetings.tsx"
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "requirement": "Full Motoko backend with CRUD for all entities including late-fee accrual logic, salary calculation, session visibility flags, and credentials persistence",
+      "reason": "backend/main.mo is heavily truncated. Only partial types are visible and only createCircular function body is shown. CRUD for most entities, late-fee logic, salary calculation, and session visibility cannot be confirmed.",
+      "evidence": [
+        "backend/main.mo"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "requirement": "Student Entry Session setting must be separately configurable in the UI",
+      "reason": "AdminSessions.tsx references setStudentEntrySession from the store but the visible code is truncated and the actual UI control for this setting cannot be confirmed present.",
+      "evidence": [
+        "frontend/src/pages/admin/AdminSessions.tsx"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Internet Identity blockchain authentication integration with AuthClient, DelegationIdentity, and II_URL provider",
+      "reason": "The build request explicitly lists Internet Identity / blockchain authentication as a non-goal, yet useInternetIdentity.ts and useActor.ts implement a full II login flow with AuthClient.",
+      "evidence": [
+        "frontend/src/hooks/useInternetIdentity.ts",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    },
+    {
+      "description": "AccessControl / MixinAuthorization system in Motoko backend with admin token initialization via _initializeAccessControlWithSecret",
+      "reason": "The build request does not mention any role-based access control system at the Motoko canister layer. This is an unrequested security layer added on top of requirements.",
+      "evidence": [
+        "backend/main.mo",
+        "frontend/src/hooks/useActor.ts"
+      ]
+    }
+  ],
+  "confidence": 0.52,
+  "changed_files": [
+    "all_files_summary.json",
+    "backend/main.mo",
+    "frontend-file-summaries.txt",
+    "frontend/index.css",
+    "frontend/index.html",
+    "frontend/src/App.tsx",
+    "frontend/src/hooks/useActor.ts",
+    "frontend/src/hooks/useInternetIdentity.ts",
+    "frontend/src/index.css",
+    "frontend/src/main.tsx",
+    "frontend/src/pages/Login.tsx",
+    "frontend/src/pages/admin/AdminAcademics.tsx",
+    "frontend/src/pages/admin/AdminCirculars.tsx",
+    "frontend/src/pages/admin/AdminDashboard.tsx",
+    "frontend/src/pages/admin/AdminEventCalendar.tsx",
+    "frontend/src/pages/admin/AdminGreetings.tsx",
+    "frontend/src/pages/admin/AdminLeave.tsx",
+    "frontend/src/pages/admin/AdminLessonPlan.tsx",
+    "frontend/src/pages/admin/AdminSessions.tsx",
+    "frontend/src/pages/admin/AdminStudents.tsx",
+    "frontend/src/pages/admin/AdminTeacherTimetable.tsx",
+    "frontend/src/pages/admin/AdminTeachers.tsx",
+    "frontend/src/pages/admin/ClassDetailView.tsx",
+    "frontend/src/pages/admin/ClassFees.tsx",
+    "frontend/src/pages/admin/ClassStudents.tsx",
+    "frontend/src/pages/admin/ClassSubjects.tsx",
+    "frontend/src/pages/admin/ClassTimetable.tsx",
+    "frontend/src/pages/teacher/TeacherCommunication.tsx",
+    "frontend/src/pages/teacher/TeacherDashboard.tsx",
+    "frontend/src/pages/teacher/TeacherHome.tsx",
+    "frontend/src/pages/teacher/TeacherMenu.tsx",
+    "frontend/src/pages/teacher/TeacherProfile.tsx",
+    "frontend/src/store/appStore.ts",
+    "frontend/src/utils/urlParams.ts",
+    "frontend/tailwind.config.js",
+    "project_state.json"
+  ]
+}

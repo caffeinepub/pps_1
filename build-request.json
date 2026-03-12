@@ -1,0 +1,524 @@
+{
+  "kind": "build_request",
+  "title": "PPS School ERP — Full Admin & Teacher Portal (Initial Build)",
+  "projectName": "PPS School ERP",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Implement a login screen for the PPS app with a role selector (Admin / Teacher / Student), username field, password field, and school code field. The school code must be validated against the hardcoded value 'palakpublicschool'. Admin default credentials: username = admin name, password = name + '123', code = palakpublicschool. Teacher and student credentials are set by the admin during their creation. On successful login, route the user to their respective dashboard.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Login screen shows role selector, username, password, and school code fields",
+        "Wrong school code shows an error and blocks login",
+        "Admin logs in with correct credentials and lands on Admin dashboard",
+        "Teacher logs in with admin-assigned credentials and lands on Teacher dashboard",
+        "Student logs in with admin-assigned credentials and lands on Student dashboard"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Build the Admin dashboard with a bottom navigation bar containing: Home (Circulars), Session, Students, Teachers, Teacher Timetable, Teacher Academics, Lesson Plan, Event Calendar, Greetings, Leave. All primary navigation for the admin must live in this bottom bar. Sub-module navigation (e.g., Class Students / Class Timetable / Class Subject / Class Teacher / Fees inside a class) must appear as a top horizontal tab/slide bar.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Admin bottom navigation bar has all specified items",
+        "Tapping a bottom nav item loads the correct module",
+        "Inside Session > Class, a top tab bar shows Class Students, Class Timetable, Class Subject, Class Teacher, Fees"
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Implement the Circulars module for Admin. Features: (1) List of circulars showing title and first two lines of description; tapping opens full circular in black text with date bold and centered at top. (2) A '+' button to create a new circular with fields: title, description, session selection (dropdown from existing sessions), class selection (after session is picked — shows 'Select All' or specific classes from that session), and multiple attachments (images only; the first attachment is added, then a '+' sign adds more; attachments are optional). (3) Each circular in history has a three-dots menu (top-right) with Edit and Delete. Edit pre-fills all fields. Delete removes the circular permanently.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Circular list shows title and 2-line preview",
+        "Full circular view shows date bold centered at top, title, description, attachments in black",
+        "New circular form has title, description, session select, class multi-select (select all / specific), optional multiple attachments",
+        "Three-dots menu on each circular has Edit and Delete",
+        "Edit pre-fills existing data; Delete removes the circular"
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Implement the Sessions module for Admin. Features: (1) A '+' button to add a new session by name; saved sessions appear in a history list. (2) Tapping a session shows a '+' button to add classes by name; added classes appear in a list under that session. (3) Tapping a class opens a top tab bar with: Class Students, Class Timetable, Class Subject, Class Teacher, Fees.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Sessions are created by name and listed in history",
+        "Classes are added within a session and listed under it",
+        "Tapping a class opens top tabs: Class Students, Class Timetable, Class Subject, Class Teacher, Fees",
+        "Session visibility settings: admin can separately control which sessions are visible to students and to teachers"
+      ]
+    },
+    {
+      "id": "REQ-5",
+      "text": "Implement Class Students under Session > Class. Features: (1) 'Add Student' button that collects: name, admission no, Aadhaar no, date of birth, date of joining, address, class (auto-set to current class), father name, mother name, father mobile no, mother mobile no, father/mother occupation, guardian info (optional), username, password, code. (2) Students are saved alphabetically by first name with admission no. (3) Three-dots menu per student with: Edit (pre-fills form), View (read-only full profile), Pass (select destination session + class to transfer student — student data including username/password/code is preserved), Delete (removes student from admin, teacher, and student views). (4) Passed students are removed from current class and added to the destination class.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Add Student form captures all required and optional fields",
+        "Student list is alphabetical by first name with adm. no",
+        "Edit pre-fills all fields; View shows read-only profile",
+        "Pass opens session then class selector; student transfers with credentials intact",
+        "Delete removes student from all views"
+      ]
+    },
+    {
+      "id": "REQ-6",
+      "text": "Implement Class Timetable under Session > Class. Features: (1) 'Create New Timetable' button. (2) Form to add periods: period name (optional; if blank, label = 'Free Period' in green), period number, day (dropdown: Monday–Saturday). (3) After saving a period it appears in a tabular list; a '+' button below adds the next period. (4) A 'Save' button at the bottom center saves the full timetable. (5) In history, a day-filter dropdown at the top filters the tabular view by day; period name is bold and large.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Period form has period name (optional), period no, day selector",
+        "Blank period name saves as 'Free Period' shown in green",
+        "Timetable displayed in tabular form with bold large period names",
+        "Day filter at top of history filters visible periods",
+        "Final Save button persists the full timetable"
+      ]
+    },
+    {
+      "id": "REQ-7",
+      "text": "Implement Class Subject under Session > Class. Features: (1) 'Create Subject' button opening a form with subject name and a teacher selector (from teachers added in that session). (2) After save, subjects appear alphabetically in a tabular list with subject name in bold and assigned teacher name below. Subject selection everywhere else in the app for this class must be a dropdown from this list — no free-text subject entry.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Subject form has subject name field and teacher dropdown",
+        "Subjects saved alphabetically in tabular form; name bold",
+        "All subject pickers throughout the app for a given class use this list as source"
+      ]
+    },
+    {
+      "id": "REQ-8",
+      "text": "Implement the Fees module under Session > Class. Features: (1) Top tabs: Total, Approved, Pending. (2) Total tab: alphabetical list of all students in the class; tapping a student shows 12 months (January–December) in a table; tapping a month shows fields for Approved Amount, Pending Amount, and Total Amount (admin fills these manually); Save stores the entry; history row per student has an Update button to edit. (3) Approved tab: select month first, then alphabetical table of students with name, adm. no, approved amount. (4) Pending tab: select month first, then alphabetical table with name, adm. no, pending amount. (5) Late fee rule: if pending amount > 2000, add ₹30 every 5 days automatically to the pending amount and persist.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Three tabs: Total, Approved, Pending",
+        "Total tab lists students; per student shows 12-month table",
+        "Per month entry captures Approved, Pending, Total amounts",
+        "Update button in history allows re-editing fee entry",
+        "Approved and Pending tabs require month selection then show filtered alphabetical student table",
+        "Late fee of ₹30 accrues every 5 days when pending > ₹2000"
+      ]
+    },
+    {
+      "id": "REQ-9",
+      "text": "Implement the Students module (Admin top-level). Features: (1) Session selector at top. (2) 'Add Student' button at top center (same full form as REQ-5). (3) Class-wise alphabetical list of students showing name + adm. no. (4) Three-dots menu per student: Edit, View, Pass (transfer), Delete — same behavior as REQ-5.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Session selector shown; students listed class-wise alphabetically",
+        "Add Student opens full form",
+        "Three-dots: Edit, View, Pass, Delete all functional"
+      ]
+    },
+    {
+      "id": "REQ-10",
+      "text": "Implement the Teachers module (Admin top-level). Features: (1) Session selector. (2) 'Add New Teacher' button with form: teacher name, date of birth, joining date, qualification, father name, mother name, contact number, teacher no, email, address, username, password, code. (3) Teachers listed sorted by teacher number with name. (4) Three-dots menu per teacher: View (full profile), Edit (pre-filled form), Delete (removes teacher from admin, teacher, and student/class views).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Add Teacher form captures all specified fields",
+        "Teacher list sorted by teacher number",
+        "Three-dots: View, Edit, Delete functional",
+        "Delete removes teacher from all views"
+      ]
+    },
+    {
+      "id": "REQ-11",
+      "text": "Implement the Teacher Timetable module (Admin top-level). Features: (1) Session selector. (2) 'Add New Timetable' button with form: select teacher (dropdown), select day (Monday–Saturday), period no, period name (optional = Free Period shown green), class selection (optional, blank = free period). (3) After saving each period, a 'Next' button adds another; 'Done & Save' saves the full timetable to history with teacher name. (4) In history, tap teacher name → select day → view that day's timetable in tabular form (period no, period name bold, class, subject). (5) Three-dots per entry: Edit (re-opens form), Delete (removes from admin and teacher views).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Add timetable form has teacher, day, period no, period name (optional), class (optional)",
+        "Blank period name shown as 'Free Period' in green",
+        "History lists by teacher name; tap → day select → tabular timetable",
+        "Three-dots: Edit and Delete"
+      ]
+    },
+    {
+      "id": "REQ-12",
+      "text": "Implement the Greetings module (Admin top-level). Features: (1) '+' button to add a new greeting with: title, description, session selection, class selection (all or specific), and multiple JPG image attachments (no PDFs, no links, no video). (2) Greetings saved to history showing title and three-dots menu (Edit, Delete). (3) Edit pre-fills all fields including previously attached images.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Add greeting form has title, description, session, class selector, multi-image (JPG) upload",
+        "History shows title with three-dots (Edit / Delete)",
+        "Edit pre-fills all fields"
+      ]
+    },
+    {
+      "id": "REQ-13",
+      "text": "Implement the Lesson Plan module (Admin top-level). Features: Admin views lesson plans submitted by teachers. Each entry shows teacher name; tapping opens full details: session, class, subject, topic, start date, end date. Admin can save to history.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Lesson plan list shows teacher name",
+        "Tapping shows full lesson plan details",
+        "Admin can save lesson plans to history"
+      ]
+    },
+    {
+      "id": "REQ-14",
+      "text": "Implement the Event Calendar module (Admin top-level). Features: (1) Session selector. (2) After session select, a monthly calendar view opens. (3) Tapping a date opens a description input field; saving stores the event description for that date. (4) Saved events are visible in the same calendar view. (5) Teachers and students can also view these events in their respective dashboards (read-only).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Session selector then calendar view",
+        "Tapping date opens description field and saves on confirm",
+        "Events shown on calendar dates",
+        "Teachers and students can view events (read-only)"
+      ]
+    },
+    {
+      "id": "REQ-15",
+      "text": "Implement the Academics module (Admin top-level) with sub-options: Progress, Leave, Subject, Teacher Academics, Salary, Attendance.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Academics section is accessible from admin navigation",
+        "Sub-options: Progress, Leave, Subject, Teacher Academics, Salary, Attendance are all accessible"
+      ]
+    },
+    {
+      "id": "REQ-16",
+      "text": "Implement Progress (under Admin > Academics). Features: (1) Session select → class select. (2) Add title for a progress batch. (3) Inside title: 'New Progress' entry with total marks, student selection (all or specific from that class), and subject selection (from class-assigned subjects). (4) Save and Next adds more subjects. (5) 'Done & Send' sends the progress sheet to the respective subject teacher. (6) In history, subjects with teacher-completed marks show a checkmark (√); incomplete remain plain. (7) 'Approve' button on completed progress sends results to selected students. (8) Order of subjects in history and in student/teacher view matches the order admin added them.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Progress form: title, total marks, student multi-select, subject select",
+        "Done & Send dispatches to subject teacher",
+        "Teacher can enter obtained marks and submit back",
+        "Completed subjects show √ in admin history",
+        "Approve sends finalized results to students",
+        "Subject order preserved throughout"
+      ]
+    },
+    {
+      "id": "REQ-17",
+      "text": "Implement Leave (under Admin > Academics). Features: (1) Session selector. (2) List of teachers in that session; teachers who are on leave are highlighted. (3) Tapping a teacher shows: teacher name, teacher no, class incharge (or 'No Class Teacher'), leave days, leave date, leave reason. (4) Two action buttons: Approve and Reject — admin decision is sent back to the teacher.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Teacher list shown after session select; absent/leave teachers highlighted",
+        "Teacher leave detail view shows all specified fields",
+        "Approve/Reject buttons notify the teacher"
+      ]
+    },
+    {
+      "id": "REQ-18",
+      "text": "Implement Subject (under Admin > Academics). Features: (1) Session select → class select. (2) 'Add Subject' button with subject name. (3) Saved subjects appear in history for that class. Note: everywhere subjects are selected in the app for a given class, the picker must draw from this class-specific subject list — no free-text input.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Session > class > add subject by name",
+        "Subject saved to history for that class",
+        "Subject pickers in all modules for a class use this list"
+      ]
+    },
+    {
+      "id": "REQ-19",
+      "text": "Implement Teacher Academics (under Admin > Academics). Features: (1) Session select → teacher list sorted by teacher number. (2) Tapping a teacher opens a top tab bar with: Class Incharge, Timetable, Classes & Subjects, Attendance, Salary, Teacher Detail. (3) Class Incharge: select a class or mark as 'No Class Teacher'; saved to history with three-dots (Edit, Delete). (4) Timetable: same tabular view as the Teacher Timetable module. (5) Classes & Subjects: 'Add New' → select class → select subject from that class's list; tabular history (class + subject). (6) Attendance: 'Add Attendance' opens calendar; select date; mark present/absent/half-day/leave/holiday (no mark = present); save monthly with three-dots (Edit). (7) Salary (per-teacher): set per-day amount; auto-calculate: total_salary = present_days × per_day_amount; deduct absent days and holidays; fields: per-day amount (admin sets), total amount (admin sets), deducted amount (auto), absent days (auto), holiday days (auto), total salary (auto); monthly history with three-dots. (8) Teacher Detail: read-only profile view.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Teacher list sorted by teacher no",
+        "Top tab bar: Class Incharge, Timetable, Classes & Subjects, Attendance, Salary, Teacher Detail",
+        "Class Incharge saved/edited/deleted",
+        "Attendance calendar with all 5 status options; no mark = present",
+        "Salary auto-calculates based on attendance; monthly history",
+        "Classes & Subjects tabular history"
+      ]
+    },
+    {
+      "id": "REQ-20",
+      "text": "Implement Session Visibility Settings (under Admin > Session). A 'Visible Sessions' option opens two sub-sections: Students and Teachers. Admin can select which sessions are visible to students and which are visible to teachers. A separate 'Student Entry Session' setting controls which session new students are entered into.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Visible Sessions has Student and Teacher sub-sections",
+        "Admin can toggle session visibility per role",
+        "Student entry session is separately configurable"
+      ]
+    },
+    {
+      "id": "REQ-21",
+      "text": "Build the Teacher dashboard. After login, teacher selects a session (from admin-allowed sessions only). Bottom navigation bar: Home, Communication, Profile, Menu. (1) Home: shows circulars sent to teacher's classes for the current date; date/month/day shown bold at top center; tapping a circular shows full view in black (title, description, attachments only). (2) Communication: session is pre-selected; class selector; search student by name; tap student to open chat with text input and '+' button for attachments (image/audio/video/file); send button; history saved. (3) Profile: read-only teacher profile. (4) Menu: My Class, My Timetable, Leave, Salary, Progress, Homework, Lesson Plan, Event Calendar, Greetings, My Academics.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Teacher bottom nav: Home, Communication, Profile, Menu",
+        "Home shows today's circulars for teacher's classes",
+        "Full circular view in black with title, description, attachments",
+        "Communication: class select, student search, chat with text + multi-type attachments",
+        "Profile shows read-only teacher info",
+        "Menu lists all 10 sub-items"
+      ]
+    },
+    {
+      "id": "REQ-22",
+      "text": "Implement Teacher > Menu > My Class with a top tab bar: Class Incharge, Class Students, Class Timetable, Attendance, Leave, Subjects. (1) Class Incharge: shows which class the teacher is incharge of, or 'No Class Incharge'. (2) Class Students: alphabetical list; tap a student to view full profile. (3) Class Timetable: select day → tabular timetable. (4) Attendance: student list → tap student → calendar → mark absent/half-day/leave/holiday (no mark = present); monthly history with three-dots (Edit, Delete). (5) Leave: tap student → enter date, days, reason → Approve or Reject. (6) Subjects: alphabetical list of subjects with teacher names. All sections are visible only to class teachers (teachers assigned as class incharge).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Top tab bar with 6 items visible only to class teachers",
+        "Class Students: alphabetical list; tap shows full profile",
+        "Class Timetable: day select then tabular view",
+        "Attendance: per-student calendar marking; monthly history",
+        "Leave: per-student approval/rejection",
+        "Subjects: alphabetical with teacher names"
+      ]
+    },
+    {
+      "id": "REQ-23",
+      "text": "Implement Teacher > Menu > My Timetable. Teacher selects day, then sees their timetable in tabular form: period no, period name (bold), class, subject.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Day selector at top",
+        "Timetable shown in tabular form with period no, period name bold, class, subject"
+      ]
+    },
+    {
+      "id": "REQ-24",
+      "text": "Implement Teacher > Menu > Leave. Two tabs: My Leave and Other Leave. (1) My Leave: 'Add Leave' form with day, date, reason, class incharge select (class or 'No Class Teacher'); submit sends to admin; history shows result (Approved/Rejected). (2) Other Leave: read-only list of all teachers' leave records.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Two tabs: My Leave and Other Leave",
+        "Add Leave form: day, date, reason, class selector",
+        "Leave result (Approved/Rejected) shown in history",
+        "Other Leave tab shows all teachers' leaves"
+      ]
+    },
+    {
+      "id": "REQ-25",
+      "text": "Implement Teacher > Menu > Salary. Teacher selects month, then sees: Total Amount, Deducted Amount, and Approved Amount (all sourced from admin-set salary data and attendance records).",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Month selector at top",
+        "Shows Total, Deducted, Approved amounts for that month"
+      ]
+    },
+    {
+      "id": "REQ-26",
+      "text": "Implement Teacher > Menu > Progress. Teacher sees the classes assigned to them by admin. Tapping a class shows progress titles; tapping a title shows alphabetical student list with the teacher's subject; teacher enters obtained marks per student, then saves and sends back to admin.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Assigned classes listed",
+        "Progress title and student list visible",
+        "Teacher can enter obtained marks per student and submit to admin"
+      ]
+    },
+    {
+      "id": "REQ-27",
+      "text": "Implement Teacher > Menu > Homework. 'Add Homework' form with: session select, class select, title, description, attachments (images and videos, multiple allowed). Save to history.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Homework form: session, class, title, description, multi-attachment (image/video)",
+        "Homework saved to history"
+      ]
+    },
+    {
+      "id": "REQ-28",
+      "text": "Implement Teacher > Menu > Lesson Plan. Form with: select session, select class, select subject (from class's subject list), topic, start date, end date. Send & Save — sent to admin view and saved to teacher history.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Lesson plan form: session, class, subject (dropdown), topic, start date, end date",
+        "Send & Save stores and dispatches to admin"
+      ]
+    },
+    {
+      "id": "REQ-29",
+      "text": "Implement Teacher > Menu > My Academics with a top tab bar: Class Incharge, Classes to Teach, My Attendance. (1) Class Incharge: shows class the teacher is incharge of. (2) Classes to Teach: tabular list of classes and their associated subjects this teacher teaches. (3) My Attendance: read-only view of own attendance records.",
+      "target": "both",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Top tab bar: Class Incharge, Classes to Teach, My Attendance",
+        "Classes to Teach: tabular with class and subject columns",
+        "My Attendance: read-only personal attendance history"
+      ]
+    },
+    {
+      "id": "REQ-30",
+      "text": "Apply a consistent orange color theme throughout the entire application. Circular content (full view) must be displayed in black text on a white/light background. All primary action buttons, active nav indicators, and key UI elements should use orange as the dominant accent color. Typography should be clean and readable; layout must be mobile-first with clear visual hierarchy.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Primary color throughout UI is orange (e.g., #F97316 or similar)",
+        "Circular full-view text rendered in black",
+        "Bottom navigation bar uses orange for active state",
+        "Mobile-first responsive layout",
+        "Consistent typography hierarchy across all screens"
+      ]
+    },
+    {
+      "id": "REQ-31",
+      "text": "Implement the backend data model and storage in Motoko for all entities: Sessions, Classes, Students, Teachers, Circulars, Timetables, Subjects, Fees, Greetings, LessonPlans, EventCalendar, Progress, Leave, Attendance, Salary, Homework, Communication (messages). All entities must support create, read, update, delete operations. Students and teachers must carry username/password/code credentials. Session visibility per role must be stored.",
+      "target": "backend",
+      "source": {
+        "messageIds": [
+          "msg-2"
+        ]
+      },
+      "acceptanceCriteria": [
+        "All listed entities have stable Motoko types with CRUD functions",
+        "Student and teacher records store username, password, code",
+        "Session records store per-role visibility flags",
+        "Fees include late-fee accrual logic (₹30 per 5 days if pending > ₹2000)",
+        "Salary calculation uses attendance records (present days × per_day_rate)"
+      ]
+    }
+  ],
+  "constraints": [
+    "School code is hardcoded as 'palakpublicschool'",
+    "Circular full-view text must always render in black",
+    "Subject selection everywhere must use class-specific subject dropdown lists — no free-text subject entry",
+    "Bottom navigation bar (Home, Session, Students, Teachers, Teacher Timetable, etc.) must be at the bottom for admin",
+    "Sub-module navigation (Class Students, Class Timetable, Class Subject, Class Teacher, Fees) must appear as a top tab bar",
+    "Images in Greetings and attachments must be JPG photos only — no PDFs, no links, no other file types for greetings",
+    "Student username/password/code must persist even after session transfer (Pass action)",
+    "All Motoko logic must remain in a single main actor file"
+  ],
+  "nonGoals": [
+    "Student-facing dashboard and student login flow (mentioned in requirements but not to be built in this iteration)",
+    "Real-time messaging via WebSockets",
+    "Email or SMS notification delivery",
+    "External cloud storage for attachments",
+    "Internet Identity / blockchain authentication",
+    "Multi-school or multi-tenant support"
+  ],
+  "imageRequirements": {
+    "required": [
+      "PPS school ERP app logo — bold stylized letters 'PPS' in orange and white on a dark background, school crest style (pps-logo.dim_256x256.png)"
+    ],
+    "edits": []
+  }
+}
